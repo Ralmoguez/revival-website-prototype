@@ -71,7 +71,7 @@
         <div class="hidden md:flex space-x-6 font-mono-vhs text-[9px] uppercase tracking-[0.25em]">
             <a href="javascript:void(0)" onclick="showView('landing')" class="hover:text-yellow-400">Home</a>
             <a href="javascript:void(0)" onclick="scrollToSection('program')" class="hover:text-yellow-400">Program</a>
-            <a href="javascript:void(0)" onclick="scrollToSection('input')" class="hover:text-yellow-400">Input Source</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('input')" class="hover:text-yellow-400">Inquiry</a>
             <a href="javascript:void(0)" onclick="scrollToSection('wall')" class="hover:text-yellow-400">Wall</a>
             <a href="javascript:void(0)" onclick="showView('photos')" class="hover:text-yellow-400">Photos</a>
             <a href="javascript:void(0)" onclick="showView('recordings')" class="hover:text-yellow-400">Recordings</a>
@@ -83,7 +83,7 @@
         <section class="hero-image flex items-end p-12">
             <div class="bg-black/70 p-8 backdrop-blur-sm border-l-4 border-yellow-400">
                 <h1 class="text-6xl font-bold tracking-tighter uppercase italic text-white">It's Still Moving.</h1>
-                <p class="font-mono-vhs text-xs text-yellow-400 uppercase tracking-widest mt-2">Pneumatology Leadership Retreat</p>
+                <p class="font-mono-vhs text-xs text-yellow-400 uppercase tracking-widest mt-2">ENC Malolos Leadership Retreat</p>
             </div>
         </section>
 
@@ -145,7 +145,7 @@
         </section>
 
         <section id="manifest" class="py-32 px-6 max-w-xl mx-auto">
-            <h2 class="text-center font-mono-vhs text-[10px] uppercase tracking-widest mb-12 opacity-30">Equipment Manifest</h2>
+            <h2 class="text-center font-mono-vhs text-[10px] uppercase tracking-widest mb-12 opacity-30">Equipment Checklist</h2>
             <div class="space-y-4">
                 <div class="flex justify-between items-center bg-white/5 p-6 border border-white/5">
                     <span class="font-mono-vhs text-sm">PHYSICAL BIBLE</span>
@@ -168,9 +168,9 @@
 
         <section id="input" class="py-32 bg-[#f4f1ea] text-black px-6">
             <div class="max-w-2xl mx-auto text-center">
-                <h2 class="font-typewriter text-4xl mb-4 uppercase">Input Source</h2>
+                <h2 class="font-typewriter text-4xl mb-4 uppercase">Inquiry</h2>
                 <p class="font-mono-vhs text-xs opacity-50 mb-12 uppercase tracking-widest">What are your questions about the Holy Spirit?</p>
-                <textarea class="w-full h-48 bg-transparent border-b-2 border-black/10 p-6 font-typewriter text-2xl focus:outline-none focus:border-black resize-none" placeholder="Type transmission..."></textarea>
+                <textarea class="w-full h-48 bg-transparent border-b-2 border-black/10 p-6 font-typewriter text-2xl focus:outline-none focus:border-black resize-none" placeholder="Type your question..."></textarea>
                 <div class="flex justify-end mt-8">
                     <button class="bg-black text-white px-10 py-3 font-mono-vhs text-[10px] uppercase tracking-widest hover:invert">Transmit to Speakers</button>
                 </div>
@@ -213,7 +213,7 @@
 
     <main id="photosView" class="view-section pt-32 px-6 pb-40">
         <div class="max-w-6xl mx-auto crt-overlay p-8 bg-zinc-950">
-            <h2 class="text-6xl font-bold italic mb-2 tracking-tighter uppercase text-white">Pneuma Archive</h2>
+            <h2 class="text-6xl font-bold italic mb-2 tracking-tighter uppercase text-white">Photo Archive</h2>
             <p class="font-mono-vhs text-[10px] opacity-30 uppercase tracking-[0.4em] mb-16">Direct Image Signal</p>
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
                 <script>for(let i=1; i<=24; i++) document.write(`<div class="aspect-square bg-zinc-900 border border-white/5 flex items-center justify-center font-mono-vhs text-[8px] opacity-20 hover:opacity-50 transition-opacity">ARCHIVE_IMG_${i.toString().padStart(3,'0')}</div>`);</script>
@@ -224,10 +224,10 @@
     <main id="recordingsView" class="view-section pt-32 px-6 pb-40">
         <div class="max-w-4xl mx-auto crt-overlay p-8 bg-zinc-950">
             <h2 class="text-6xl font-bold italic mb-2 tracking-tighter uppercase text-white">Recordings</h2>
-            <p class="font-mono-vhs text-[10px] opacity-30 uppercase tracking-[0.4em] mb-16">Session Master Feed</p>
+            <p class="font-mono-vhs text-[10px] opacity-30 uppercase tracking-[0.4em] mb-16">Session Feed</p>
             <div class="space-y-12">
                 <script>
-                    const sess = ["Sanctification", "Spirit Empowered Life", "Spirit of Sonship", "Walking in the Spirit", "The Outpouring"];
+                    const sess = ["Sanctification", "Spirit Empowered Life", "Walking in the Spirit", "The Outpouring"];
                     sess.forEach((s, i) => {
                         document.write(`
                             <div class="bg-black/50 p-6 border border-white/10 flex flex-col md:flex-row gap-8 items-center group">
@@ -253,7 +253,7 @@
             </div>
 
             <div id="deckContainer" class="bg-[#141415] border-4 border-[#2a2a2b] p-12 shadow-2xl relative crt-overlay">
-                <div class="absolute top-4 left-6 font-mono-vhs text-[8px] opacity-30 uppercase tracking-[0.5em]">Pneuma-Master // DM-26-PRO</div>
+                <div class="absolute top-4 left-6 font-mono-vhs text-[8px] opacity-30 uppercase tracking-[0.5em]">Archive // DM-26-PRO</div>
                 <div class="absolute top-4 right-6 flex space-x-2">
                     <div class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse shadow-[0_0_5px_red]"></div>
                     <div class="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
@@ -270,7 +270,7 @@
     </main>
 
     <footer class="py-20 text-center opacity-10 font-mono-vhs text-[10px] uppercase tracking-[0.6em]">
-        © 2026 Revival Archive // Technical Prototype V10.0
+        © 2026 Revival Archive // Technical Prototype V1.0
     </footer>
 
     <script>
@@ -325,12 +325,12 @@
                 ui.innerHTML = `
                     <div class="w-full text-left">
                         <div class="flex justify-between items-center mb-10">
-                            <h3 class="dymo-label">Mode: Archive Upload</h3>
+                            <h3 class="dymo-label">Mode: Audio Upload</h3>
                             <div class="osd-green text-[10px] font-bold">READY_TO_STREAM</div>
                         </div>
                         <div class="border-4 border-dashed border-[#3f3f40] p-24 text-center hover:border-yellow-400 cursor-pointer transition-all bg-black/50 group" onclick="simulateUpload()">
                             <svg class="w-16 h-16 mx-auto mb-6 opacity-20 group-hover:text-yellow-400 group-hover:opacity-100" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
-                            <p class="font-mono-vhs text-[11px] uppercase tracking-[0.3em]">Drop Prophetic Word Transmission Here</p>
+                            <p class="font-mono-vhs text-[11px] uppercase tracking-[0.3em]">Drop Prophetic Prayer Recording Here</p>
                         </div>
                     </div>
                 `;
@@ -338,7 +338,7 @@
                 ui.innerHTML = `
                     <div class="w-full">
                         <div class="flex justify-between items-center mb-12">
-                            <h3 class="dymo-label">Master Status: SECURED</h3>
+                            <h3 class="dymo-label">Status: SECURED</h3>
                             <div class="osd-green text-[10px] flex space-x-6">
                                 <span id="playerStatus">PLAYBACK_STOPPED</span>
                                 <span id="vcrClock">00:00:00</span>
@@ -350,7 +350,7 @@
                                 <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-4z"/></svg>
                             </div>
                             <div class="text-center md:text-left flex-1">
-                                <p class="font-mono-vhs text-[10px] text-yellow-400 uppercase tracking-widest mb-2">Authenticated Master Feed</p>
+                                <p class="font-mono-vhs text-[10px] text-yellow-400 uppercase tracking-widest mb-2">Authenticated Audio Feed</p>
                                 <h4 class="text-4xl font-bold uppercase italic tracking-tighter text-white">Your Record of the Move</h4>
                                 <p class="text-[10px] opacity-30 font-mono-vhs uppercase mt-3 tracking-tighter">ID: REV-26-XP // FILE: PROPHETIC_WORD.MP3</p>
                             </div>
@@ -366,7 +366,7 @@
                                 </button>
                             </div>
                             <button class="font-mono-vhs text-[10px] text-yellow-400 border-2 border-yellow-400/20 px-10 py-3 hover:bg-yellow-400 hover:text-black transition-all font-bold">
-                                DOWNLOAD MASTER (.MP3)
+                                DOWNLOAD AUDIO (.MP3)
                             </button>
                         </div>
                     </div>
