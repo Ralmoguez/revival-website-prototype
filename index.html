@@ -36,22 +36,21 @@
         .dymo-label {
             background-color: #000; 
             color: white; 
-            padding: 8px 16px; /* Increased vertical padding for wrapped text */
+            padding: 8px 16px; 
             border-radius: 2px;
             text-transform: uppercase; 
             box-shadow: inset 0 -2px 0 rgba(255,255,255,0.2), 3px 3px 6px rgba(0,0,0,0.6);
             letter-spacing: 2px; 
             font-family: 'IBM Plex Mono', monospace; 
             
-            /* The Fixes */
             display: inline-flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            max-width: 280px;     /* Limits width so it's forced to wrap */
-            line-height: 1.4;      /* Better spacing for multi-line declarations */
-            white-space: normal;   /* Allows text to wrap */
-            word-break: break-word; /* Prevents long single words from breaking layout */
+            max-width: 280px;      
+            line-height: 1.4;       
+            white-space: normal;   
+            word-break: break-word; 
         }
 
         /* EQUIPMENT TOGGLES */
@@ -74,77 +73,81 @@
         .sticker { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
         .sticker:hover { transform: scale(1.15) rotate(0deg) !important; z-index: 30; }
 
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 8px; height: 4px;}
         ::-webkit-scrollbar-track { background: #1a1a1b; }
         ::-webkit-scrollbar-thumb { background: #ffd600; }
+        
+        /* Hide scrollbar for nav but allow scrolling on mobile */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="analog-grain">
 
-    <nav class="fixed top-0 w-full z-40 bg-black/95 backdrop-blur-md border-b border-white/10 px-6 py-4 flex justify-between items-center">
+    <nav class="fixed top-0 w-full z-40 bg-black/95 backdrop-blur-md border-b border-white/10 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-0">
         <div class="font-mono-vhs font-bold text-yellow-400 cursor-pointer text-sm" onclick="showView('landing')">REVIVAL // 2026</div>
-        <div class="hidden md:flex space-x-6 font-mono-vhs text-[9px] uppercase tracking-[0.25em]">
-            <a href="javascript:void(0)" onclick="showView('landing')" class="hover:text-yellow-400">Home</a>
-            <a href="javascript:void(0)" onclick="scrollToSection('program')" class="hover:text-yellow-400">Program</a>
-            <a href="javascript:void(0)" onclick="scrollToSection('input')" class="hover:text-yellow-400">Inquiry</a>
-            <a href="javascript:void(0)" onclick="scrollToSection('wall')" class="hover:text-yellow-400">Wall</a>
-            <a href="javascript:void(0)" onclick="showView('photos')" class="hover:text-yellow-400">Photos</a>
-            <a href="javascript:void(0)" onclick="showView('recordings')" class="hover:text-yellow-400">Recordings</a>
-            <button onclick="showView('vault')" class="bg-yellow-400 text-black px-4 py-1 font-bold shadow-[3px_3px_0px_#000] hover:translate-y-[-1px]">THE VAULT</button>
+        <div class="flex overflow-x-auto w-full md:w-auto space-x-4 md:space-x-6 font-mono-vhs text-[8px] md:text-[9px] uppercase tracking-[0.2em] md:tracking-[0.25em] pb-1 md:pb-0 items-center justify-start md:justify-end no-scrollbar">
+            <a href="javascript:void(0)" onclick="showView('landing')" class="hover:text-yellow-400 whitespace-nowrap">Home</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('program')" class="hover:text-yellow-400 whitespace-nowrap">Program</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('input')" class="hover:text-yellow-400 whitespace-nowrap">Inquiry</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('wall')" class="hover:text-yellow-400 whitespace-nowrap">Wall</a>
+            <a href="javascript:void(0)" onclick="showView('photos')" class="hover:text-yellow-400 whitespace-nowrap">Photos</a>
+            <a href="javascript:void(0)" onclick="showView('recordings')" class="hover:text-yellow-400 whitespace-nowrap">Recordings</a>
+            <button onclick="showView('vault')" class="bg-yellow-400 text-black px-4 py-1 font-bold shadow-[3px_3px_0px_#000] hover:translate-y-[-1px] whitespace-nowrap shrink-0">THE VAULT</button>
         </div>
     </nav>
 
     <main id="landingView" class="view-section active">
-        <section class="hero-image flex items-end p-12">
-            <div class="bg-black/70 p-8 backdrop-blur-sm border-l-4 border-yellow-400">
-                <h1 class="text-6xl font-bold tracking-tighter uppercase italic text-white">It's Still Moving.</h1>
-                <p class="font-mono-vhs text-xs text-yellow-400 uppercase tracking-widest mt-2">ENC Malolos Leader's Retreat</p>
+        <section class="hero-image flex items-end p-6 md:p-12 pb-24 md:pb-12">
+            <div class="bg-black/70 p-6 md:p-8 backdrop-blur-sm border-l-2 md:border-l-4 border-yellow-400">
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tighter uppercase italic text-white">It's Still Moving.</h1>
+                <p class="font-mono-vhs text-[10px] md:text-xs text-yellow-400 uppercase tracking-widest mt-2">ENC Malolos Leader's Retreat</p>
             </div>
         </section>
 
-        <section id="about" class="py-32 px-6 max-w-4xl mx-auto">
+        <section id="about" class="py-16 md:py-32 px-6 max-w-4xl mx-auto mt-10 md:mt-0">
             <h2 class="font-mono-vhs text-yellow-400 text-[10px] mb-8 tracking-[0.5em] uppercase">// The Rationale</h2>
-            <div class="grid md:grid-cols-2 gap-12 text-2xl font-light leading-relaxed">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 text-xl md:text-2xl font-light leading-relaxed">
                 <p class="text-white">Revival is not a static event from the past; it is a movement of the Holy Spirit happening today. This retreat invites you to stop being a spectator and start becoming an <span class="italic font-bold text-yellow-400">active participant</span>.</p>
-                <p class="text-white/40 text-base font-mono-vhs leading-loose">We address how to live in a way that honors His presence, nurture a life that evidences His Fruit, and practice the language of Heaven.</p>
+                <p class="text-white/40 text-sm md:text-base font-mono-vhs leading-loose">We address how to live in a way that honors His presence, nurture a life that evidences His Fruit, and practice the language of Heaven.</p>
             </div>
         </section>
 
-        <section id="program" class="py-32 bg-black/20 px-6 border-y border-white/5">
+        <section id="program" class="py-16 md:py-32 bg-black/20 px-6 border-y border-white/5">
             <div class="max-w-4xl mx-auto">
-                <h2 class="font-mono-vhs text-white/40 text-[10px] mb-16 tracking-widest text-center uppercase">Program</h2>
-                <div class="grid md:grid-cols-2 gap-20">
-                    <div class="space-y-12">
+                <h2 class="font-mono-vhs text-white/40 text-[10px] mb-12 md:mb-16 tracking-widest text-center uppercase">Program</h2>
+                <div class="grid md:grid-cols-2 gap-16 md:gap-20">
+                    <div class="space-y-10 md:space-y-12">
                         <h3 class="dymo-label">Day 01</h3>
-                        <div class="border-l border-white/10 pl-8 space-y-12">
+                        <div class="border-l border-white/10 pl-6 md:pl-8 space-y-10 md:space-y-12">
                             <div>
                                 <p class="text-[10px] font-mono-vhs text-yellow-400 uppercase mb-1">Devotional</p>
-                                <h4 class="text-xl font-bold uppercase tracking-tight text-white">The Person of the Holy Spirit</h4>
+                                <h4 class="text-lg md:text-xl font-bold uppercase tracking-tight text-white">The Person of the Holy Spirit</h4>
                             </div>
                             <div>
                                 <p class="text-[10px] font-mono-vhs text-yellow-400 uppercase mb-1">Session 01</p>
-                                <h4 class="text-xl font-bold uppercase tracking-tight text-white">Sanctification by the Spirit</h4>
+                                <h4 class="text-lg md:text-xl font-bold uppercase tracking-tight text-white">Sanctification by the Spirit</h4>
                             </div>
                             <div>
                                 <p class="text-[10px] font-mono-vhs text-yellow-400 uppercase mb-1">Session 02</p>
-                                <h4 class="text-xl font-bold uppercase tracking-tight text-white">Spirit Empowered Life</h4>
+                                <h4 class="text-lg md:text-xl font-bold uppercase tracking-tight text-white">Spirit Empowered Life</h4>
                             </div>
                         </div>
                     </div>
-                    <div class="space-y-12">
+                    <div class="space-y-10 md:space-y-12">
                         <h3 class="dymo-label">Day 02</h3>
-                        <div class="border-l border-white/10 pl-8 space-y-12">
+                        <div class="border-l border-white/10 pl-6 md:pl-8 space-y-10 md:space-y-12">
                             <div>
                                 <p class="text-[10px] font-mono-vhs text-yellow-400 uppercase mb-1">Devotional</p>
-                                <h4 class="text-xl font-bold uppercase tracking-tight text-white">The Spirit of Sonship</h4>
+                                <h4 class="text-lg md:text-xl font-bold uppercase tracking-tight text-white">The Spirit of Sonship</h4>
                             </div>
                             <div>
                                 <p class="text-[10px] font-mono-vhs text-yellow-400 uppercase mb-1">Session 03</p>
-                                <h4 class="text-xl font-bold uppercase tracking-tight text-white">Walking in the Spirit</h4>
+                                <h4 class="text-lg md:text-xl font-bold uppercase tracking-tight text-white">Walking in the Spirit</h4>
                             </div>
                             <div>
                                 <p class="text-[10px] font-mono-vhs text-yellow-400 uppercase mb-1">Session 04</p>
-                                <h4 class="text-xl font-bold uppercase tracking-tight text-white">The Outpouring of the Holy Spirit</h4>
+                                <h4 class="text-lg md:text-xl font-bold uppercase tracking-tight text-white">The Outpouring of the Holy Spirit</h4>
                             </div>
                         </div>
                     </div>
@@ -152,42 +155,42 @@
             </div>
         </section>
 
-        <section class="py-32 px-6 text-center bg-black/40">
+        <section class="py-16 md:py-32 px-6 text-center bg-black/40">
             <h2 class="font-mono-vhs text-[10px] opacity-40 uppercase mb-8 tracking-[0.4em]">The Song Bank Mixtape</h2>
             <div class="max-w-xl mx-auto bg-black p-2 border border-white/10 shadow-2xl">
                 <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4tpgXgXAocbQPQqrDajVha?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
         </section>
 
-        <section id="checklist" class="py-32 px-6 max-w-xl mx-auto">
+        <section id="checklist" class="py-16 md:py-32 px-6 max-w-xl mx-auto">
             <h2 class="text-center font-mono-vhs text-[10px] uppercase tracking-widest mb-12 opacity-30">Equipment Checklist</h2>
             <div class="space-y-4">
-                <div class="flex justify-between items-center bg-white/5 p-6 border border-white/5">
-                    <span class="font-mono-vhs text-sm">BIBLE</span>
+                <div class="flex justify-between items-center bg-white/5 p-4 md:p-6 border border-white/5">
+                    <span class="font-mono-vhs text-xs md:text-sm">BIBLE</span>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" class="sr-only toggle-checkbox" checked>
                         <div class="w-10 h-5 bg-white/10 rounded-full toggle-label"></div>
                         <div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform toggle-dot"></div>
                     </label>
                 </div>
-                <div class="flex justify-between items-center bg-white/5 p-6 border border-white/5">
-                    <span class="font-mono-vhs text-sm">NOTEBOOK AND PEN</span>
+                <div class="flex justify-between items-center bg-white/5 p-4 md:p-6 border border-white/5">
+                    <span class="font-mono-vhs text-xs md:text-sm">NOTEBOOK AND PEN</span>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" class="sr-only toggle-checkbox" checked>
                         <div class="w-10 h-5 bg-white/10 rounded-full toggle-label"></div>
                         <div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform toggle-dot"></div>
                     </label>
                 </div>
-                <div class="flex justify-between items-center bg-white/5 p-6 border border-white/5">
-                    <span class="font-mono-vhs text-sm">JACKET</span>
+                <div class="flex justify-between items-center bg-white/5 p-4 md:p-6 border border-white/5">
+                    <span class="font-mono-vhs text-xs md:text-sm">JACKET</span>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" class="sr-only toggle-checkbox">
                         <div class="w-10 h-5 bg-white/10 rounded-full toggle-label"></div>
                         <div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform toggle-dot"></div>
                     </label>
                 </div>
-                <div class="flex justify-between items-center bg-white/5 p-6 border border-white/5">
-                    <span class="font-mono-vhs text-sm text-yellow-400">EXPECTANT HEART</span>
+                <div class="flex justify-between items-center bg-white/5 p-4 md:p-6 border border-white/5">
+                    <span class="font-mono-vhs text-xs md:text-sm text-yellow-400">EXPECTANT HEART</span>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" class="sr-only toggle-checkbox" checked>
                         <div class="w-10 h-5 bg-white/10 rounded-full toggle-label"></div>
@@ -197,51 +200,51 @@
             </div>
         </section>
 
-        <section id="input" class="py-32 bg-[#f4f1ea] text-black px-6">
+        <section id="input" class="py-16 md:py-32 bg-[#f4f1ea] text-black px-6">
             <div class="max-w-2xl mx-auto text-center">
-                <h2 class="font-typewriter text-4xl mb-4 uppercase">Inquiry</h2>
-                <p class="font-mono-vhs text-xs opacity-50 mb-12 uppercase tracking-widest">What are your questions about the Holy Spirit?</p>
-                <textarea class="w-full h-48 bg-transparent border-b-2 border-black/10 p-6 font-typewriter text-2xl focus:outline-none focus:border-black resize-none" placeholder="Type your question..."></textarea>
-                <div class="flex justify-end mt-8">
-                    <button class="bg-black text-white px-10 py-3 font-mono-vhs text-[10px] uppercase tracking-widest hover:invert">Transmit to Speakers</button>
+                <h2 class="font-typewriter text-3xl md:text-4xl mb-4 uppercase">Inquiry</h2>
+                <p class="font-mono-vhs text-[10px] md:text-xs opacity-50 mb-10 md:mb-12 uppercase tracking-widest">What are your questions about the Holy Spirit?</p>
+                <textarea class="w-full h-40 md:h-48 bg-transparent border-b-2 border-black/10 p-4 md:p-6 font-typewriter text-xl md:text-2xl focus:outline-none focus:border-black resize-none" placeholder="Type your question..."></textarea>
+                <div class="flex justify-center md:justify-end mt-8">
+                    <button class="w-full md:w-auto bg-black text-white px-8 md:px-10 py-4 md:py-3 font-mono-vhs text-[10px] uppercase tracking-widest hover:invert">Transmit to Speakers</button>
                 </div>
             </div>
         </section>
 
-        <section id="wall" class="py-32 bg-black wall-grid px-6">
+        <section id="wall" class="py-16 md:py-32 bg-black wall-grid px-6 overflow-hidden">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="dymo-label text-xl mb-4">Declaration Wall</h2>
+                <h2 class="dymo-label text-lg md:text-xl mb-4">Declaration Wall</h2>
                 
-                <div class="flex flex-wrap justify-center items-start gap-x-6 gap-y-10 my-20 min-h-[160px]" id="labelWall">
-                    <div class="dymo-label sticker" style="transform: rotate(-2deg)">HE IS STILL MOVING</div>
-                    <div class="dymo-label sticker" style="transform: rotate(3deg)">SPIRIT EMPOWERED</div>
-                    <div class="dymo-label sticker" style="transform: rotate(-1deg)">CHILD OF THE KING</div>
+                <div class="flex flex-wrap justify-center items-start gap-x-4 md:gap-x-6 gap-y-6 md:gap-y-10 my-16 md:my-20 min-h-[160px]" id="labelWall">
+                    <div class="dymo-label sticker text-sm md:text-base" style="transform: rotate(-2deg)">HE IS STILL MOVING</div>
+                    <div class="dymo-label sticker text-sm md:text-base" style="transform: rotate(3deg)">SPIRIT EMPOWERED</div>
+                    <div class="dymo-label sticker text-sm md:text-base" style="transform: rotate(-1deg)">CHILD OF THE KING</div>
                 </div>
 
-                <div class="max-w-md mx-auto">
+                <div class="max-w-md mx-auto px-2">
                     <input type="text" id="wallInput" 
-                           class="bg-transparent border-b border-white/20 w-full mb-8 p-3 text-center font-mono-vhs uppercase text-2xl focus:outline-none focus:border-yellow-400" 
+                           class="bg-transparent border-b border-white/20 w-full mb-8 p-3 text-center font-mono-vhs uppercase text-xl md:text-2xl focus:outline-none focus:border-yellow-400" 
                            placeholder="Type declaration...">
                     <button onclick="addLabel()" 
-                            class="font-mono-vhs text-[10px] text-yellow-400 uppercase tracking-widest border border-yellow-400 px-12 py-4 hover:bg-yellow-400 hover:text-black">
+                            class="w-full md:w-auto font-mono-vhs text-[10px] text-yellow-400 uppercase tracking-widest border border-yellow-400 px-8 md:px-12 py-4 hover:bg-yellow-400 hover:text-black">
                         Add to Record
                     </button>
                 </div>
             </div>
         </section>
 
-        <section id="faq" class="py-32 px-6 max-w-2xl mx-auto font-mono-vhs text-sm">
-            <h2 class="text-center text-xs opacity-30 uppercase tracking-[0.5em] mb-16">Logistics FAQ</h2>
+        <section id="faq" class="py-16 md:py-32 px-6 max-w-2xl mx-auto font-mono-vhs text-xs md:text-sm">
+            <h2 class="text-center text-[10px] md:text-xs opacity-30 uppercase tracking-[0.5em] mb-12 md:mb-16">Logistics FAQ</h2>
             <div class="space-y-4">
-                <details class="border border-white/10 p-6 bg-white/5 cursor-pointer hover:bg-white/10 group">
+                <details class="border border-white/10 p-5 md:p-6 bg-white/5 cursor-pointer hover:bg-white/10 group">
                     <summary class="font-bold uppercase tracking-tight group-hover:text-yellow-400">Where is the venue located?</summary>
                     <p class="mt-4 opacity-50 italic">Please refer to the official map sent to your center's private feed for precise coordinates.</p>
                 </details>
-                <details class="border border-white/10 p-6 bg-white/5 cursor-pointer hover:bg-white/10 group">
+                <details class="border border-white/10 p-5 md:p-6 bg-white/5 cursor-pointer hover:bg-white/10 group">
                     <summary class="font-bold uppercase tracking-tight group-hover:text-yellow-400">What is the check-in time?</summary>
                     <p class="mt-4 opacity-50 italic">Registration begins at 5:00 PM on May 29. The first recording session starts promptly at 7:00 PM.</p>
                 </details>
-                <details class="border border-white/10 p-6 bg-white/5 cursor-pointer hover:bg-white/10 group">
+                <details class="border border-white/10 p-5 md:p-6 bg-white/5 cursor-pointer hover:bg-white/10 group">
                     <summary class="font-bold uppercase tracking-tight group-hover:text-yellow-400">Is food provided?</summary>
                     <p class="mt-4 opacity-50 italic">Yes, all meals are covered from Day 1 Dinner to Day 2 Lunch.</p>
                 </details>
@@ -249,26 +252,27 @@
         </section>
     </main>
 
-<main id="photosView" class="view-section pt-32 px-6 pb-40">
-        <div class="max-w-6xl mx-auto crt-overlay p-8 bg-zinc-950">
-            <div class="flex justify-between items-end mb-16">
+<main id="photosView" class="view-section pt-24 md:pt-32 px-4 md:px-6 pb-20 md:pb-40">
+        <div class="max-w-6xl mx-auto crt-overlay p-4 md:p-8 bg-zinc-950">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-16 gap-4">
                 <div>
-                    <h2 class="text-6xl font-bold italic mb-2 tracking-tighter uppercase text-white">Photo Archive</h2>
-                    <p class="font-mono-vhs text-[10px] opacity-30 uppercase tracking-[0.4em]">Direct Image Signal // 24-Frame Burst</p>
+                    <h2 class="text-4xl md:text-6xl font-bold italic mb-2 tracking-tighter uppercase text-white">Photo Archive</h2>
+                    <p class="font-mono-vhs text-[8px] md:text-[10px] opacity-30 uppercase tracking-[0.2em] md:tracking-[0.4em]">Direct Image Signal // 24-Frame Burst</p>
                 </div>
-                <div class="text-right hidden md:block">
+                <div class="text-left md:text-right w-full md:w-auto flex justify-between md:block items-center">
                     <p class="osd-green text-[10px] mb-1">ZOOM_MODE: ACTIVE</p>
-                    <p class="font-mono-vhs text-[8px] opacity-20 uppercase">Hover to inspect frame</p>
+                    <p class="font-mono-vhs text-[8px] opacity-20 uppercase md:block hidden">Hover to inspect frame</p>
+                    <p class="font-mono-vhs text-[8px] opacity-20 uppercase md:hidden block">Tap to inspect frame</p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 relative z-0">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4 relative z-0">
                 <script>
                     for(let i=1; i<=24; i++) {
                         document.write(`
                             <div class="group relative aspect-square bg-zinc-900 border border-white/10 flex items-center justify-center 
                                         transition-all duration-300 ease-out 
-                                        hover:scale-150 hover:z-50 hover:border-yellow-400 hover:shadow-[0_0_20px_rgba(255,214,0,0.3)]
+                                        hover:scale-110 sm:hover:scale-150 hover:z-50 hover:border-yellow-400 hover:shadow-[0_0_20px_rgba(255,214,0,0.3)]
                                         cursor-zoom-in overflow-hidden">
                                 
                                 <div class="font-mono-vhs text-[8px] opacity-20 group-hover:opacity-100 transition-opacity">
@@ -289,15 +293,15 @@
         </div>
     </main>
 
-    <main id="recordingsView" class="view-section pt-32 px-6 pb-40">
-    <div class="max-w-4xl mx-auto crt-overlay p-8 bg-zinc-950 shadow-2xl border border-white/5">
-        <h2 class="text-6xl font-bold italic mb-2 tracking-tighter uppercase text-white">Recordings</h2>
-        <p class="font-mono-vhs text-[10px] opacity-30 uppercase tracking-[0.4em] mb-16">Master Session Feed // Signal Index</p>
+    <main id="recordingsView" class="view-section pt-24 md:pt-32 px-4 md:px-6 pb-20 md:pb-40">
+    <div class="max-w-4xl mx-auto crt-overlay p-4 md:p-8 bg-zinc-950 shadow-2xl border border-white/5">
+        <h2 class="text-4xl md:text-6xl font-bold italic mb-2 tracking-tighter uppercase text-white">Recordings</h2>
+        <p class="font-mono-vhs text-[8px] md:text-[10px] opacity-30 uppercase tracking-[0.2em] md:tracking-[0.4em] mb-10 md:mb-16">Master Session Feed // Signal Index</p>
         
-        <div class="space-y-12">
+        <div class="space-y-8 md:space-y-12">
             
-            <div class="bg-black/50 p-6 border border-white/10 flex flex-col md:flex-row gap-8 items-center group">
-                <div class="w-full md:w-80 aspect-video bg-zinc-900 border border-white/5 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
+            <div class="bg-black/50 p-4 md:p-6 border border-white/10 flex flex-col sm:flex-row gap-6 md:gap-8 items-start sm:items-center group">
+                <div class="w-full sm:w-48 md:w-80 aspect-video bg-zinc-900 border border-white/5 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
                     <span class="font-mono-vhs text-[10px] uppercase text-yellow-400 font-bold">[ FEED_01 ]</span>
                 </div>
                 <div class="flex-1">
@@ -305,13 +309,13 @@
                         <span class="bg-yellow-400 text-black text-[9px] font-bold px-2 py-0.5 font-mono-vhs uppercase">Devotional</span>
                         <span class="font-mono-vhs text-[9px] opacity-40 uppercase tracking-widest">Day 01</span>
                     </div>
-                    <h3 class="text-2xl font-bold uppercase tracking-tight text-white group-hover:text-yellow-400 transition-colors">The Person of the Holy Spirit</h3>
+                    <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight text-white group-hover:text-yellow-400 transition-colors">The Person of the Holy Spirit</h3>
                     <p class="font-mono-vhs text-[9px] opacity-20 mt-2 uppercase italic tracking-tighter">Status: Archive Locked</p>
                 </div>
             </div>
 
-            <div class="bg-black/50 p-6 border border-white/10 flex flex-col md:flex-row gap-8 items-center group">
-                <div class="w-full md:w-80 aspect-video bg-zinc-900 border border-white/5 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
+            <div class="bg-black/50 p-4 md:p-6 border border-white/10 flex flex-col sm:flex-row gap-6 md:gap-8 items-start sm:items-center group">
+                <div class="w-full sm:w-48 md:w-80 aspect-video bg-zinc-900 border border-white/5 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
                     <span class="font-mono-vhs text-[10px] uppercase text-yellow-400 font-bold">[ FEED_02 ]</span>
                 </div>
                 <div class="flex-1">
@@ -319,13 +323,13 @@
                         <span class="bg-yellow-400 text-black text-[9px] font-bold px-2 py-0.5 font-mono-vhs uppercase">Session 01</span>
                         <span class="font-mono-vhs text-[9px] opacity-40 uppercase tracking-widest">Day 01</span>
                     </div>
-                    <h3 class="text-2xl font-bold uppercase tracking-tight text-white group-hover:text-yellow-400 transition-colors">Sanctification by the Spirit</h3>
+                    <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight text-white group-hover:text-yellow-400 transition-colors">Sanctification by the Spirit</h3>
                     <p class="font-mono-vhs text-[9px] opacity-20 mt-2 uppercase italic tracking-tighter">Status: Archive Locked</p>
                 </div>
             </div>
 
-            <div class="bg-black/50 p-6 border border-white/10 flex flex-col md:flex-row gap-8 items-center group">
-                <div class="w-full md:w-80 aspect-video bg-zinc-900 border border-white/5 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
+            <div class="bg-black/50 p-4 md:p-6 border border-white/10 flex flex-col sm:flex-row gap-6 md:gap-8 items-start sm:items-center group">
+                <div class="w-full sm:w-48 md:w-80 aspect-video bg-zinc-900 border border-white/5 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
                     <span class="font-mono-vhs text-[10px] uppercase text-yellow-400 font-bold">[ FEED_03 ]</span>
                 </div>
                 <div class="flex-1">
@@ -333,13 +337,13 @@
                         <span class="bg-yellow-400 text-black text-[9px] font-bold px-2 py-0.5 font-mono-vhs uppercase">Session 02</span>
                         <span class="font-mono-vhs text-[9px] opacity-40 uppercase tracking-widest">Day 01</span>
                     </div>
-                    <h3 class="text-2xl font-bold uppercase tracking-tight text-white group-hover:text-yellow-400 transition-colors">Spirit Empowered Life</h3>
+                    <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight text-white group-hover:text-yellow-400 transition-colors">Spirit Empowered Life</h3>
                     <p class="font-mono-vhs text-[9px] opacity-20 mt-2 uppercase italic tracking-tighter">Status: Archive Locked</p>
                 </div>
             </div>
 
-            <div class="bg-black/50 p-6 border border-white/10 flex flex-col md:flex-row gap-8 items-center group">
-                <div class="w-full md:w-80 aspect-video bg-zinc-900 border border-white/5 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
+            <div class="bg-black/50 p-4 md:p-6 border border-white/10 flex flex-col sm:flex-row gap-6 md:gap-8 items-start sm:items-center group">
+                <div class="w-full sm:w-48 md:w-80 aspect-video bg-zinc-900 border border-white/5 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
                     <span class="font-mono-vhs text-[10px] uppercase text-yellow-400 font-bold">[ FEED_04 ]</span>
                 </div>
                 <div class="flex-1">
@@ -347,13 +351,13 @@
                         <span class="bg-yellow-400 text-black text-[9px] font-bold px-2 py-0.5 font-mono-vhs uppercase">Devotional</span>
                         <span class="font-mono-vhs text-[9px] opacity-40 uppercase tracking-widest">Day 02</span>
                     </div>
-                    <h3 class="text-2xl font-bold uppercase tracking-tight text-white group-hover:text-yellow-400 transition-colors">The Spirit of Sonship</h3>
+                    <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight text-white group-hover:text-yellow-400 transition-colors">The Spirit of Sonship</h3>
                     <p class="font-mono-vhs text-[9px] opacity-20 mt-2 uppercase italic tracking-tighter">Status: Archive Locked</p>
                 </div>
             </div>
 
-            <div class="bg-black/50 p-6 border border-white/10 flex flex-col md:flex-row gap-8 items-center group">
-                <div class="w-full md:w-80 aspect-video bg-zinc-900 border border-white/5 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
+            <div class="bg-black/50 p-4 md:p-6 border border-white/10 flex flex-col sm:flex-row gap-6 md:gap-8 items-start sm:items-center group">
+                <div class="w-full sm:w-48 md:w-80 aspect-video bg-zinc-900 border border-white/5 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
                     <span class="font-mono-vhs text-[10px] uppercase text-yellow-400 font-bold">[ FEED_05 ]</span>
                 </div>
                 <div class="flex-1">
@@ -361,13 +365,13 @@
                         <span class="bg-yellow-400 text-black text-[9px] font-bold px-2 py-0.5 font-mono-vhs uppercase">Session 03</span>
                         <span class="font-mono-vhs text-[9px] opacity-40 uppercase tracking-widest">Day 02</span>
                     </div>
-                    <h3 class="text-2xl font-bold uppercase tracking-tight text-white group-hover:text-yellow-400 transition-colors">Walking in the Spirit</h3>
+                    <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight text-white group-hover:text-yellow-400 transition-colors">Walking in the Spirit</h3>
                     <p class="font-mono-vhs text-[9px] opacity-20 mt-2 uppercase italic tracking-tighter">Status: Archive Locked</p>
                 </div>
             </div>
 
-            <div class="bg-black/50 p-6 border border-white/10 flex flex-col md:flex-row gap-8 items-center group">
-                <div class="w-full md:w-80 aspect-video bg-zinc-900 border border-white/5 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
+            <div class="bg-black/50 p-4 md:p-6 border border-white/10 flex flex-col sm:flex-row gap-6 md:gap-8 items-start sm:items-center group">
+                <div class="w-full sm:w-48 md:w-80 aspect-video bg-zinc-900 border border-white/5 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
                     <span class="font-mono-vhs text-[10px] uppercase text-yellow-400 font-bold">[ FEED_06 ]</span>
                 </div>
                 <div class="flex-1">
@@ -375,7 +379,7 @@
                         <span class="bg-yellow-400 text-black text-[9px] font-bold px-2 py-0.5 font-mono-vhs uppercase">Session 04</span>
                         <span class="font-mono-vhs text-[9px] opacity-40 uppercase tracking-widest text-yellow-400">Day 02</span>
                     </div>
-                    <h3 class="text-2xl font-bold uppercase tracking-tight text-white group-hover:text-yellow-400 transition-colors">The Outpouring of the Holy Spirit</h3>
+                    <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight text-white group-hover:text-yellow-400 transition-colors">The Outpouring of the Holy Spirit</h3>
                     <p class="font-mono-vhs text-[9px] opacity-20 mt-2 uppercase italic tracking-tighter text-yellow-400">Status: Master Signal Captured</p>
                 </div>
             </div>
@@ -384,32 +388,28 @@
     </div>
 </main>
 
-    <main id="vaultView" class="view-section pt-32 px-6 pb-40">
+    <main id="vaultView" class="view-section pt-24 md:pt-32 px-4 md:px-6 pb-20 md:pb-40">
         <div class="max-w-3xl mx-auto">
-            <div class="flex justify-center space-x-2 mb-12 opacity-30 hover:opacity-100 transition-opacity">
-                <button onclick="renderStage('locked')" class="text-[9px] font-mono-vhs border border-white/20 px-4 py-2 hover:bg-yellow-400 hover:text-black">STAGE 1: PRE-EVENT</button>
-                <button onclick="renderStage('upload')" class="text-[9px] font-mono-vhs border border-white/20 px-4 py-2 hover:bg-yellow-400 hover:text-black">STAGE 2: RECORDING</button>
-                <button onclick="renderStage('archived')" class="text-[9px] font-mono-vhs border border-white/20 px-4 py-2 hover:bg-yellow-400 hover:text-black">STAGE 3: ARCHIVE</button>
+            <div class="flex flex-wrap justify-center gap-2 mb-10 md:mb-12 opacity-80 md:opacity-30 hover:opacity-100 transition-opacity">
+                <button onclick="renderStage('locked')" class="w-full sm:w-auto text-[9px] font-mono-vhs border border-white/20 px-4 py-3 md:py-2 hover:bg-yellow-400 hover:text-black">STAGE 1: PRE-EVENT</button>
+                <button onclick="renderStage('upload')" class="w-full sm:w-auto text-[9px] font-mono-vhs border border-white/20 px-4 py-3 md:py-2 hover:bg-yellow-400 hover:text-black">STAGE 2: RECORDING</button>
+                <button onclick="renderStage('archived')" class="w-full sm:w-auto text-[9px] font-mono-vhs border border-white/20 px-4 py-3 md:py-2 hover:bg-yellow-400 hover:text-black">STAGE 3: ARCHIVE</button>
             </div>
 
-            <div id="deckContainer" class="bg-[#141415] border-4 border-[#2a2a2b] p-12 shadow-2xl relative crt-overlay">
-                <div class="absolute top-4 left-6 font-mono-vhs text-[8px] opacity-30 uppercase tracking-[0.5em]">Archive // DM-26-PRO</div>
-                <div class="absolute top-4 right-6 flex space-x-2">
+            <div id="deckContainer" class="bg-[#141415] border-2 md:border-4 border-[#2a2a2b] p-6 md:p-12 shadow-2xl relative crt-overlay">
+                <div class="absolute top-4 left-4 md:left-6 font-mono-vhs text-[6px] md:text-[8px] opacity-30 uppercase tracking-[0.3em] md:tracking-[0.5em]">Archive // DM-26-PRO</div>
+                <div class="absolute top-4 right-4 md:right-6 flex space-x-2">
                     <div class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse shadow-[0_0_5px_red]"></div>
                     <div class="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
                 </div>
 
-                <div id="deckInterface" class="mt-8 flex flex-col items-center justify-center min-h-[450px]">
-                    <h2 class="text-6xl font-bold italic mb-6 text-white">THE VAULT</h2>
-                    <p class="font-mono-vhs text-[10px] opacity-40 mb-12 uppercase tracking-[0.4em]">Insert VHS Key to Authenticate</p>
-                    <input type="text" class="bg-black border-2 border-[#3f3f40] text-center text-4xl font-mono-vhs w-64 p-6 mb-12 focus:outline-none focus:border-yellow-400" placeholder="____-26">
-                    <button onclick="renderStage('locked_result')" class="btn-deck text-white px-16 py-5 font-mono-vhs text-[10px] uppercase tracking-widest">Access Record</button>
-                </div>
+                <div id="deckInterface" class="mt-8 flex flex-col items-center justify-center min-h-[350px] md:min-h-[450px]">
+                    </div>
             </div>
         </div>
     </main>
 
-    <footer class="py-20 text-center opacity-10 font-mono-vhs text-[10px] uppercase tracking-[0.6em]">
+    <footer class="py-10 md:py-20 text-center opacity-10 font-mono-vhs text-[8px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.6em]">
         © 2026 Revival Archive // Technical Prototype V1.0
     </footer>
 
@@ -432,7 +432,7 @@
             const val = document.getElementById('wallInput').value;
             if(!val) return;
             const div = document.createElement('div');
-            div.className = 'dymo-label sticker';
+            div.className = 'dymo-label sticker text-sm md:text-base';
             div.style.transform = `rotate(${Math.random() * 8 - 4}deg)`;
             div.textContent = val.toUpperCase();
             document.getElementById('labelWall').appendChild(div);
@@ -446,17 +446,17 @@
 
             if(state === 'locked') {
                 ui.innerHTML = `
-                    <h2 class="text-6xl font-bold italic mb-6 text-white">THE VAULT</h2>
-                    <p class="font-mono-vhs text-[10px] opacity-40 mb-12 uppercase tracking-[0.4em]">Insert VHS Key to Authenticate</p>
-                    <input type="text" class="bg-black border-2 border-[#3f3f40] text-center text-4xl font-mono-vhs w-64 p-6 mb-12 focus:outline-none" placeholder="____-26">
-                    <button onclick="renderStage('locked_result')" class="btn-deck text-white px-16 py-5 font-mono-vhs text-[10px] uppercase tracking-widest">Access Record</button>
+                    <h2 class="text-4xl md:text-6xl font-bold italic mb-4 md:mb-6 text-white text-center">THE VAULT</h2>
+                    <p class="font-mono-vhs text-[8px] md:text-[10px] opacity-40 mb-8 md:mb-12 uppercase tracking-[0.2em] md:tracking-[0.4em] text-center">Insert VHS Key to Authenticate</p>
+                    <input type="text" class="bg-black border-2 border-[#3f3f40] text-center text-2xl md:text-4xl font-mono-vhs w-full max-w-[16rem] md:w-64 p-4 md:p-6 mb-8 md:mb-12 focus:outline-none focus:border-yellow-400" placeholder="____-26">
+                    <button onclick="renderStage('locked_result')" class="w-full sm:w-auto btn-deck text-white px-8 md:px-16 py-4 md:py-5 font-mono-vhs text-[10px] uppercase tracking-widest">Access Record</button>
                 `;
             } else if (state === 'locked_result') {
                 ui.innerHTML = `
-                    <div class="animate-pulse flex flex-col items-center">
-                        <div class="dymo-label mb-10">Key Recognized: XP-2026</div>
-                        <div class="osd-green text-sm mb-6">ENCODING_IN_PROGRESS...</div>
-                        <p class="font-mono-vhs text-[11px] opacity-60 leading-relaxed max-w-xs text-center uppercase tracking-tighter">
+                    <div class="animate-pulse flex flex-col items-center px-4">
+                        <div class="dymo-label text-sm md:text-base mb-8 md:mb-10 text-center">Key Recognized: XP-2026</div>
+                        <div class="osd-green text-xs md:text-sm mb-4 md:mb-6 text-center">ENCODING_IN_PROGRESS...</div>
+                        <p class="font-mono-vhs text-[9px] md:text-[11px] opacity-60 leading-relaxed max-w-xs text-center uppercase tracking-tighter">
                             The Spirit is still moving. Your personal record will unlock on May 30 after the final Outpouring.
                         </p>
                     </div>
@@ -464,48 +464,48 @@
             } else if (state === 'upload') {
                 ui.innerHTML = `
                     <div class="w-full text-left">
-                        <div class="flex justify-between items-center mb-10">
-                            <h3 class="dymo-label">Mode: Audio Upload</h3>
-                            <div class="osd-green text-[10px] font-bold">READY_TO_STREAM</div>
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-10 gap-4">
+                            <h3 class="dymo-label text-xs md:text-base">Mode: Audio Upload</h3>
+                            <div class="osd-green text-[8px] md:text-[10px] font-bold">READY_TO_STREAM</div>
                         </div>
-                        <div class="border-4 border-dashed border-[#3f3f40] p-24 text-center hover:border-yellow-400 cursor-pointer transition-all bg-black/50 group" onclick="simulateUpload()">
-                            <svg class="w-16 h-16 mx-auto mb-6 opacity-20 group-hover:text-yellow-400 group-hover:opacity-100" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
-                            <p class="font-mono-vhs text-[11px] uppercase tracking-[0.3em]">Drop Prophetic Prayer Recording Here</p>
+                        <div class="border-4 border-dashed border-[#3f3f40] p-8 sm:p-12 md:p-24 text-center hover:border-yellow-400 cursor-pointer transition-all bg-black/50 group" onclick="simulateUpload()">
+                            <svg class="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 opacity-20 group-hover:text-yellow-400 group-hover:opacity-100 transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
+                            <p class="font-mono-vhs text-[9px] md:text-[11px] uppercase tracking-[0.1em] md:tracking-[0.3em]">Drop Prophetic Prayer Recording Here</p>
                         </div>
                     </div>
                 `;
             } else if (state === 'archived') {
                 ui.innerHTML = `
                     <div class="w-full">
-                        <div class="flex justify-between items-center mb-12">
-                            <h3 class="dymo-label">Status: SECURED</h3>
-                            <div class="osd-green text-[10px] flex space-x-6">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 md:mb-12 gap-4">
+                            <h3 class="dymo-label text-xs md:text-base">Status: SECURED</h3>
+                            <div class="osd-green text-[8px] md:text-[10px] flex space-x-4 md:space-x-6 w-full sm:w-auto justify-between sm:justify-end">
                                 <span id="playerStatus">PLAYBACK_STOPPED</span>
                                 <span id="vcrClock">00:00:00</span>
                             </div>
                         </div>
 
-                        <div class="bg-black border-2 border-[#3f3f40] p-10 mb-12 relative overflow-hidden flex flex-col md:flex-row items-center gap-10">
-                            <div class="w-24 h-24 bg-yellow-400 text-black flex items-center justify-center shadow-2xl">
-                                <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-4z"/></svg>
+                        <div class="bg-black border-2 border-[#3f3f40] p-6 md:p-10 mb-8 md:mb-12 relative overflow-hidden flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                            <div class="w-16 h-16 md:w-24 md:h-24 shrink-0 bg-yellow-400 text-black flex items-center justify-center shadow-2xl">
+                                <svg class="w-8 h-8 md:w-12 md:h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-4z"/></svg>
                             </div>
                             <div class="text-center md:text-left flex-1">
-                                <p class="font-mono-vhs text-[10px] text-yellow-400 uppercase tracking-widest mb-2">Authenticated Audio Feed</p>
-                                <h4 class="text-4xl font-bold uppercase italic tracking-tighter text-white">Your Record of the Move</h4>
-                                <p class="text-[10px] opacity-30 font-mono-vhs uppercase mt-3 tracking-tighter">ID: REV-26-XP // FILE: PROPHETIC_WORD.MP3</p>
+                                <p class="font-mono-vhs text-[8px] md:text-[10px] text-yellow-400 uppercase tracking-widest mb-2">Authenticated Audio Feed</p>
+                                <h4 class="text-2xl md:text-4xl font-bold uppercase italic tracking-tighter text-white leading-none mb-2 md:mb-0">Your Record of the Move</h4>
+                                <p class="text-[8px] md:text-[10px] opacity-30 font-mono-vhs uppercase mt-2 md:mt-3 tracking-tighter word-break break-all">ID: REV-26-XP // FILE: PROPHETIC_WORD.MP3</p>
                             </div>
                         </div>
 
-                        <div class="flex flex-wrap justify-between items-center gap-6 border-t border-[#3f3f40] pt-10">
-                            <div class="flex space-x-3">
-                                <button onclick="playAudio()" class="btn-deck px-10 py-3 flex items-center text-white">
-                                    <span class="text-xs mr-3">▶</span> <span class="font-mono-vhs text-[10px] font-bold">PLAY</span>
+                        <div class="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6 border-t border-[#3f3f40] pt-6 md:pt-10">
+                            <div class="flex flex-wrap justify-center sm:justify-start gap-3 w-full md:w-auto">
+                                <button onclick="playAudio()" class="flex-1 sm:flex-none btn-deck px-4 sm:px-10 py-3 flex items-center justify-center text-white">
+                                    <span class="text-xs mr-2 md:mr-3">▶</span> <span class="font-mono-vhs text-[10px] font-bold">PLAY</span>
                                 </button>
-                                <button onclick="stopAudio()" class="btn-deck px-10 py-3 flex items-center text-white">
-                                    <span class="text-xs mr-3">◼</span> <span class="font-mono-vhs text-[10px] font-bold">STOP</span>
+                                <button onclick="stopAudio()" class="flex-1 sm:flex-none btn-deck px-4 sm:px-10 py-3 flex items-center justify-center text-white">
+                                    <span class="text-xs mr-2 md:mr-3">◼</span> <span class="font-mono-vhs text-[10px] font-bold">STOP</span>
                                 </button>
                             </div>
-                            <button class="font-mono-vhs text-[10px] text-yellow-400 border-2 border-yellow-400/20 px-10 py-3 hover:bg-yellow-400 hover:text-black transition-all font-bold">
+                            <button class="w-full md:w-auto font-mono-vhs text-[10px] text-yellow-400 border-2 border-yellow-400/20 px-6 md:px-10 py-3 hover:bg-yellow-400 hover:text-black transition-all font-bold text-center">
                                 DOWNLOAD AUDIO (.MP3)
                             </button>
                         </div>
@@ -518,11 +518,11 @@
             const ui = document.getElementById('deckInterface');
             ui.innerHTML = `
                 <div class="w-full text-left">
-                    <h3 class="osd-green text-xs mb-10 uppercase tracking-widest">WRITING_TO_ARCHIVE_BITSTREAM...</h3>
-                    <div class="w-full bg-[#2a2a2b] h-3 mb-12">
+                    <h3 class="osd-green text-[10px] md:text-xs mb-6 md:mb-10 uppercase tracking-widest">WRITING_TO_ARCHIVE_BITSTREAM...</h3>
+                    <div class="w-full bg-[#2a2a2b] h-2 md:h-3 mb-8 md:mb-12">
                         <div class="bg-yellow-400 h-full animate-progress"></div>
                     </div>
-                    <div class="grid grid-cols-2 gap-6 font-mono-vhs text-[9px] opacity-40 uppercase tracking-widest">
+                    <div class="grid grid-cols-2 gap-4 md:gap-6 font-mono-vhs text-[8px] md:text-[9px] opacity-40 uppercase tracking-widest">
                         <p>BUFFER_STATUS: 100%</p>
                         <p class="text-right">WRITE_LOCK: ENGAGED</p>
                         <p>SIGNAL: PURE_SOURCE</p>
