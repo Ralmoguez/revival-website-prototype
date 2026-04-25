@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REVIVAL: VHS VAULT 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #1a1a1b; color: #f4f1ea; scroll-behavior: smooth; overflow-x: hidden; }
+        .font-mono-vhs { font-family: 'IBM Plex Mono', monospace; }
+        .font-typewriter { font-family: 'Special Elite', cursive; }
+        
+        /* HERO IMAGE SECTION */
+        .hero-image {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('pg1.png'); 
+            background-size: cover; background-position: center; height: 100vh;
+        }
+
+        /* ANALOG GRAIN & CRT SCANLINES */
+        .analog-grain::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 50; opacity: 0.04;
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+        }
+
+        .crt-overlay {
+            position: relative; overflow: hidden;
+        }
+        .crt-overlay::after {
+            content: " "; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 2; background-size: 100% 3px, 3px 100%; pointer-events: none;
+        }
+
+        .dymo-label {
+            background-color: #000; color: white; padding: 4px 14px; border-radius: 2px;
+            text-transform: uppercase; box-shadow: inset 0 -2px 0 rgba(255,255,255,0.2), 3px 3px 6px rgba(0,0,0,0.6);
+            letter-spacing: 2px; font-family: 'IBM Plex Mono', monospace; display: inline-block;
+        }
+
+        /* EQUIPMENT TOGGLES */
+        .toggle-checkbox:checked + .toggle-label { background-color: #ffd600; }
+        .toggle-checkbox:checked + .toggle-label .toggle-dot { transform: translateX(100%); background-color: #000; }
+
+        .view-section { display: none; }
+        .view-section.active { display: block; }
+
+        /* HARDWARE UI */
+        .osd-green { color: #00ff00; text-shadow: 0 0 8px #00ff00; font-family: 'IBM Plex Mono', monospace; }
+        .btn-deck {
+            background: linear-gradient(145deg, #2e2e2f, #242425);
+            border: 1px solid #3f3f40; box-shadow: 3px 3px 0px #000; transition: all 0.1s;
+        }
+        .btn-deck:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px #000; }
+
+        /* WALL GRID */
+        .wall-grid { background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 30px 30px; }
+        .sticker { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
+        .sticker:hover { transform: scale(1.15) rotate(0deg) !important; z-index: 30; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1a1a1b; }
+        ::-webkit-scrollbar-thumb { background: #ffd600; }
+    </style>
+</head>
+<body class="analog-grain">
+
+    <nav class="fixed top-0 w-full z-40 bg-black/95 backdrop-blur-md border-b border-white/10 px-6 py-4 flex justify-between items-center">
+        <div class="font-mono-vhs font-bold text-yellow-400 cursor-pointer text-sm" onclick="showView('landing')">REVIVAL // 2026</div>
+        <div class="hidden md:flex space-x-6 font-mono-vhs text-[9px] uppercase tracking-[0.25em]">
+            <a href="javascript:void(0)" onclick="showView('landing')" class="hover:text-yellow-400">Home</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('program')" class="hover:text-yellow-400">Program</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('input')" class="hover:text-yellow-400">Input Source</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('wall')" class="hover:text-yellow-400">Wall</a>
+            <a href="javascript:void(0)" onclick="showView('photos')" class="hover:text-yellow-400">Photos</a>
+            <a href="javascript:void(0)" onclick="showView('recordings')" class="hover:text-yellow-400">Recordings</a>
+            <button onclick="showView('vault')" class="bg-yellow-400 text-black px-4 py-1 font-bold shadow-[3px_3px_0px_#000] hover:translate-y-[-1px]">THE VAULT</button>
+        </div>
+    </nav>
+
+    <main id="landingView" class="view-section active">
+        <section class="hero-image flex items-end p-12">
+            <div class="bg-black/70 p-8 backdrop-blur-sm border-l-4 border-yellow-400">
+                <h1 class="text-6xl font-bold tracking-tighter uppercase italic text-white">It's Still Moving.</h1>
+                <p class="font-mono-vhs text-xs text-yellow-400 uppercase tracking-widest mt-2">Pneumatology Leadership Retreat</p>
+            </div>
+        </section>
+
+        <section id="about" class="py-32 px-6 max-w-4xl mx-auto">
+            <h2 class="font-mono-vhs text-yellow-400 text-[10px] mb-8 tracking-[0.5em] uppercase">// The Rationale</h2>
+            <div class="grid md:grid-cols-2 gap-12 text-2xl font-light leading-relaxed">
+                <p class="text-white">Revival is not a static event from the past; it is a movement of the Holy Spirit happening today. This retreat invites you to stop being a spectator and start becoming an <span class="italic font-bold text-yellow-400">active participant</span>.</p>
+                <p class="text-white/40 text-base font-mono-vhs leading-loose">We address how to live in a way that honors His presence, nurture a life that evidences His Fruit, and practice the language of Heaven.</p>
+            </div>
+        </section>
+
+        <section id="program" class="py-32 bg-black/20 px-6 border-y border-white/5">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-mono-vhs text-white/40 text-[10px] mb-16 tracking-widest text-center uppercase">Program Manifest // Signal Index</h2>
+                <div class="grid md:grid-cols-2 gap-20">
+                    <div class="space-y-12">
+                        <h3 class="dymo-label">Day 01</h3>
+                        <div class="border-l border-white/10 pl-8 space-y-12">
+                            <div>
+                                <p class="text-[10px] font-mono-vhs text-yellow-400 uppercase mb-1">Devotional</p>
+                                <h4 class="text-xl font-bold uppercase tracking-tight text-white">The Person of the Holy Spirit</h4>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-mono-vhs text-yellow-400 uppercase mb-1">Session 01</p>
+                                <h4 class="text-xl font-bold uppercase tracking-tight text-white">Sanctification by the Spirit</h4>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-mono-vhs text-yellow-400 uppercase mb-1">Session 02</p>
+                                <h4 class="text-xl font-bold uppercase tracking-tight text-white">Spirit Empowered Life</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-12">
+                        <h3 class="dymo-label">Day 02</h3>
+                        <div class="border-l border-white/10 pl-8 space-y-12">
+                            <div>
+                                <p class="text-[10px] font-mono-vhs text-yellow-400 uppercase mb-1">Devotional</p>
+                                <h4 class="text-xl font-bold uppercase tracking-tight text-white">The Spirit of Sonship</h4>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-mono-vhs text-yellow-400 uppercase mb-1">Session 03</p>
+                                <h4 class="text-xl font-bold uppercase tracking-tight text-white">Walking in the Spirit</h4>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-mono-vhs text-yellow-400 uppercase mb-1">Session 04</p>
+                                <h4 class="text-xl font-bold uppercase tracking-tight text-white">The Outpouring of the Holy Spirit</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-32 px-6 text-center bg-black/40">
+            <h2 class="font-mono-vhs text-[10px] opacity-40 uppercase mb-8 tracking-[0.4em]">The Song Bank Mixtape</h2>
+            <div class="max-w-xl mx-auto bg-black p-2 border border-white/10 shadow-2xl">
+                <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4tpgXgXAocbQPQqrDajVha?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+        </section>
+
+        <section id="manifest" class="py-32 px-6 max-w-xl mx-auto">
+            <h2 class="text-center font-mono-vhs text-[10px] uppercase tracking-widest mb-12 opacity-30">Equipment Manifest</h2>
+            <div class="space-y-4">
+                <div class="flex justify-between items-center bg-white/5 p-6 border border-white/5">
+                    <span class="font-mono-vhs text-sm">PHYSICAL BIBLE</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only toggle-checkbox" checked>
+                        <div class="w-10 h-5 bg-white/10 rounded-full toggle-label"></div>
+                        <div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform toggle-dot"></div>
+                    </label>
+                </div>
+                <div class="flex justify-between items-center bg-white/5 p-6 border border-white/5">
+                    <span class="font-mono-vhs text-sm">ANALOG JOURNAL</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only toggle-checkbox">
+                        <div class="w-10 h-5 bg-white/10 rounded-full toggle-label"></div>
+                        <div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform toggle-dot"></div>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <section id="input" class="py-32 bg-[#f4f1ea] text-black px-6">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="font-typewriter text-4xl mb-4 uppercase">Input Source</h2>
+                <p class="font-mono-vhs text-xs opacity-50 mb-12 uppercase tracking-widest">What are your questions about the Holy Spirit?</p>
+                <textarea class="w-full h-48 bg-transparent border-b-2 border-black/10 p-6 font-typewriter text-2xl focus:outline-none focus:border-black resize-none" placeholder="Type transmission..."></textarea>
+                <div class="flex justify-end mt-8">
+                    <button class="bg-black text-white px-10 py-3 font-mono-vhs text-[10px] uppercase tracking-widest hover:invert">Transmit to Speakers</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="wall" class="py-32 bg-black wall-grid px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="dymo-label text-xl mb-4">Declaration Wall</h2>
+                <div class="flex flex-wrap justify-center gap-6 my-20 min-h-[160px]" id="labelWall">
+                    <div class="dymo-label sticker" style="transform: rotate(-2deg)">HE IS STILL MOVING</div>
+                    <div class="dymo-label sticker" style="transform: rotate(3deg)">SPIRIT EMPOWERED</div>
+                    <div class="dymo-label sticker" style="transform: rotate(-1deg)">CHILD OF THE KING</div>
+                </div>
+                <div class="max-w-md mx-auto">
+                    <input type="text" id="wallInput" class="bg-transparent border-b border-white/20 w-full mb-8 p-3 text-center font-mono-vhs uppercase text-2xl focus:outline-none focus:border-yellow-400" placeholder="Type declaration...">
+                    <button onclick="addLabel()" class="font-mono-vhs text-[10px] text-yellow-400 uppercase tracking-widest border border-yellow-400 px-12 py-4 hover:bg-yellow-400 hover:text-black">Add to Record</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="py-32 px-6 max-w-2xl mx-auto font-mono-vhs text-sm">
+            <h2 class="text-center text-xs opacity-30 uppercase tracking-[0.5em] mb-16">Logistics FAQ</h2>
+            <div class="space-y-4">
+                <details class="border border-white/10 p-6 bg-white/5 cursor-pointer hover:bg-white/10 group">
+                    <summary class="font-bold uppercase tracking-tight group-hover:text-yellow-400">Where is the venue located?</summary>
+                    <p class="mt-4 opacity-50 italic">Please refer to the official map sent to your center's private feed for precise coordinates.</p>
+                </details>
+                <details class="border border-white/10 p-6 bg-white/5 cursor-pointer hover:bg-white/10 group">
+                    <summary class="font-bold uppercase tracking-tight group-hover:text-yellow-400">What is the check-in time?</summary>
+                    <p class="mt-4 opacity-50 italic">Registration begins at 5:00 PM on May 29. The first recording session starts promptly at 7:00 PM.</p>
+                </details>
+                <details class="border border-white/10 p-6 bg-white/5 cursor-pointer hover:bg-white/10 group">
+                    <summary class="font-bold uppercase tracking-tight group-hover:text-yellow-400">Is food provided?</summary>
+                    <p class="mt-4 opacity-50 italic">Yes, all meals are covered from Day 1 Dinner to Day 2 Lunch.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <main id="photosView" class="view-section pt-32 px-6 pb-40">
+        <div class="max-w-6xl mx-auto crt-overlay p-8 bg-zinc-950">
+            <h2 class="text-6xl font-bold italic mb-2 tracking-tighter uppercase text-white">Pneuma Archive</h2>
+            <p class="font-mono-vhs text-[10px] opacity-30 uppercase tracking-[0.4em] mb-16">Direct Image Signal</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                <script>for(let i=1; i<=24; i++) document.write(`<div class="aspect-square bg-zinc-900 border border-white/5 flex items-center justify-center font-mono-vhs text-[8px] opacity-20 hover:opacity-50 transition-opacity">ARCHIVE_IMG_${i.toString().padStart(3,'0')}</div>`);</script>
+            </div>
+        </div>
+    </main>
+
+    <main id="recordingsView" class="view-section pt-32 px-6 pb-40">
+        <div class="max-w-4xl mx-auto crt-overlay p-8 bg-zinc-950">
+            <h2 class="text-6xl font-bold italic mb-2 tracking-tighter uppercase text-white">Recordings</h2>
+            <p class="font-mono-vhs text-[10px] opacity-30 uppercase tracking-[0.4em] mb-16">Session Master Feed</p>
+            <div class="space-y-12">
+                <script>
+                    const sess = ["Sanctification", "Spirit Empowered Life", "Spirit of Sonship", "Walking in the Spirit", "The Outpouring"];
+                    sess.forEach((s, i) => {
+                        document.write(`
+                            <div class="bg-black/50 p-6 border border-white/10 flex flex-col md:flex-row gap-8 items-center group">
+                                <div class="w-full md:w-80 aspect-video bg-zinc-900 flex items-center justify-center opacity-30 font-mono-vhs text-[10px] group-hover:opacity-100 transition-opacity">[ SESSION_FEED_0${i+1} ]</div>
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold uppercase tracking-tight text-white">${s}</h3>
+                                    <p class="font-mono-vhs text-[10px] opacity-40 mt-2 uppercase">Day 0${i < 2 ? 1 : 2} // Signal Captured Successfully</p>
+                                </div>
+                            </div>
+                        `);
+                    });
+                </script>
+            </div>
+        </div>
+    </main>
+
+    <main id="vaultView" class="view-section pt-32 px-6 pb-40">
+        <div class="max-w-3xl mx-auto">
+            <div class="flex justify-center space-x-2 mb-12 opacity-30 hover:opacity-100 transition-opacity">
+                <button onclick="renderStage('locked')" class="text-[9px] font-mono-vhs border border-white/20 px-4 py-2 hover:bg-yellow-400 hover:text-black">STAGE 1: PRE-EVENT</button>
+                <button onclick="renderStage('upload')" class="text-[9px] font-mono-vhs border border-white/20 px-4 py-2 hover:bg-yellow-400 hover:text-black">STAGE 2: RECORDING</button>
+                <button onclick="renderStage('archived')" class="text-[9px] font-mono-vhs border border-white/20 px-4 py-2 hover:bg-yellow-400 hover:text-black">STAGE 3: ARCHIVE</button>
+            </div>
+
+            <div id="deckContainer" class="bg-[#141415] border-4 border-[#2a2a2b] p-12 shadow-2xl relative crt-overlay">
+                <div class="absolute top-4 left-6 font-mono-vhs text-[8px] opacity-30 uppercase tracking-[0.5em]">Pneuma-Master // DM-26-PRO</div>
+                <div class="absolute top-4 right-6 flex space-x-2">
+                    <div class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse shadow-[0_0_5px_red]"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
+                </div>
+
+                <div id="deckInterface" class="mt-8 flex flex-col items-center justify-center min-h-[450px]">
+                    <h2 class="text-6xl font-bold italic mb-6 text-white">THE VAULT</h2>
+                    <p class="font-mono-vhs text-[10px] opacity-40 mb-12 uppercase tracking-[0.4em]">Insert VHS Key to Authenticate</p>
+                    <input type="text" class="bg-black border-2 border-[#3f3f40] text-center text-4xl font-mono-vhs w-64 p-6 mb-12 focus:outline-none focus:border-yellow-400" placeholder="____-26">
+                    <button onclick="renderStage('locked_result')" class="btn-deck text-white px-16 py-5 font-mono-vhs text-[10px] uppercase tracking-widest">Access Record</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-20 text-center opacity-10 font-mono-vhs text-[10px] uppercase tracking-[0.6em]">
+        © 2026 Revival Archive // Technical Prototype V10.0
+    </footer>
+
+    <script>
+        let isPlaying = false;
+        let timerInt;
+
+        function showView(v) { 
+            document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(v + 'View').classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function scrollToSection(id) { 
+            showView('landing');
+            setTimeout(() => document.getElementById(id).scrollIntoView({behavior:'smooth'}), 100); 
+        }
+
+        function addLabel() {
+            const val = document.getElementById('wallInput').value;
+            if(!val) return;
+            const div = document.createElement('div');
+            div.className = 'dymo-label sticker';
+            div.style.transform = `rotate(${Math.random() * 8 - 4}deg)`;
+            div.textContent = val.toUpperCase();
+            document.getElementById('labelWall').appendChild(div);
+            document.getElementById('wallInput').value = '';
+        }
+
+        // MASTER DECK SIMULATOR
+        function renderStage(state) {
+            const ui = document.getElementById('deckInterface');
+            stopAudio();
+
+            if(state === 'locked') {
+                ui.innerHTML = `
+                    <h2 class="text-6xl font-bold italic mb-6 text-white">THE VAULT</h2>
+                    <p class="font-mono-vhs text-[10px] opacity-40 mb-12 uppercase tracking-[0.4em]">Insert VHS Key to Authenticate</p>
+                    <input type="text" class="bg-black border-2 border-[#3f3f40] text-center text-4xl font-mono-vhs w-64 p-6 mb-12 focus:outline-none" placeholder="____-26">
+                    <button onclick="renderStage('locked_result')" class="btn-deck text-white px-16 py-5 font-mono-vhs text-[10px] uppercase tracking-widest">Access Record</button>
+                `;
+            } else if (state === 'locked_result') {
+                ui.innerHTML = `
+                    <div class="animate-pulse flex flex-col items-center">
+                        <div class="dymo-label mb-10">Key Recognized: XP-2026</div>
+                        <div class="osd-green text-sm mb-6">ENCODING_IN_PROGRESS...</div>
+                        <p class="font-mono-vhs text-[11px] opacity-60 leading-relaxed max-w-xs text-center uppercase tracking-tighter">
+                            The Spirit is still moving. Your personal record will unlock on May 30 after the final Outpouring.
+                        </p>
+                    </div>
+                `;
+            } else if (state === 'upload') {
+                ui.innerHTML = `
+                    <div class="w-full text-left">
+                        <div class="flex justify-between items-center mb-10">
+                            <h3 class="dymo-label">Mode: Archive Upload</h3>
+                            <div class="osd-green text-[10px] font-bold">READY_TO_STREAM</div>
+                        </div>
+                        <div class="border-4 border-dashed border-[#3f3f40] p-24 text-center hover:border-yellow-400 cursor-pointer transition-all bg-black/50 group" onclick="simulateUpload()">
+                            <svg class="w-16 h-16 mx-auto mb-6 opacity-20 group-hover:text-yellow-400 group-hover:opacity-100" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
+                            <p class="font-mono-vhs text-[11px] uppercase tracking-[0.3em]">Drop Prophetic Word Transmission Here</p>
+                        </div>
+                    </div>
+                `;
+            } else if (state === 'archived') {
+                ui.innerHTML = `
+                    <div class="w-full">
+                        <div class="flex justify-between items-center mb-12">
+                            <h3 class="dymo-label">Master Status: SECURED</h3>
+                            <div class="osd-green text-[10px] flex space-x-6">
+                                <span id="playerStatus">PLAYBACK_STOPPED</span>
+                                <span id="vcrClock">00:00:00</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-black border-2 border-[#3f3f40] p-10 mb-12 relative overflow-hidden flex flex-col md:flex-row items-center gap-10">
+                            <div class="w-24 h-24 bg-yellow-400 text-black flex items-center justify-center shadow-2xl">
+                                <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-4z"/></svg>
+                            </div>
+                            <div class="text-center md:text-left flex-1">
+                                <p class="font-mono-vhs text-[10px] text-yellow-400 uppercase tracking-widest mb-2">Authenticated Master Feed</p>
+                                <h4 class="text-4xl font-bold uppercase italic tracking-tighter text-white">Your Record of the Move</h4>
+                                <p class="text-[10px] opacity-30 font-mono-vhs uppercase mt-3 tracking-tighter">ID: REV-26-XP // FILE: PROPHETIC_WORD.MP3</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap justify-between items-center gap-6 border-t border-[#3f3f40] pt-10">
+                            <div class="flex space-x-3">
+                                <button onclick="playAudio()" class="btn-deck px-10 py-3 flex items-center text-white">
+                                    <span class="text-xs mr-3">▶</span> <span class="font-mono-vhs text-[10px] font-bold">PLAY</span>
+                                </button>
+                                <button onclick="stopAudio()" class="btn-deck px-10 py-3 flex items-center text-white">
+                                    <span class="text-xs mr-3">◼</span> <span class="font-mono-vhs text-[10px] font-bold">STOP</span>
+                                </button>
+                            </div>
+                            <button class="font-mono-vhs text-[10px] text-yellow-400 border-2 border-yellow-400/20 px-10 py-3 hover:bg-yellow-400 hover:text-black transition-all font-bold">
+                                DOWNLOAD MASTER (.MP3)
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function simulateUpload() {
+            const ui = document.getElementById('deckInterface');
+            ui.innerHTML = `
+                <div class="w-full text-left">
+                    <h3 class="osd-green text-xs mb-10 uppercase tracking-widest">WRITING_TO_ARCHIVE_BITSTREAM...</h3>
+                    <div class="w-full bg-[#2a2a2b] h-3 mb-12">
+                        <div class="bg-yellow-400 h-full animate-progress"></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-6 font-mono-vhs text-[9px] opacity-40 uppercase tracking-widest">
+                        <p>BUFFER_STATUS: 100%</p>
+                        <p class="text-right">WRITE_LOCK: ENGAGED</p>
+                        <p>SIGNAL: PURE_SOURCE</p>
+                        <p class="text-right">PHASE: PERMANENT_RECORD</p>
+                    </div>
+                </div>
+            `;
+            setTimeout(() => renderStage('archived'), 3500);
+        }
+
+        function playAudio() {
+            document.getElementById('playerStatus').innerText = "PLAYBACK_ACTIVE";
+            document.getElementById('playerStatus').classList.add('animate-pulse');
+            let s = 0;
+            clearInterval(timerInt);
+            timerInt = setInterval(() => {
+                s++;
+                let min = Math.floor(s / 60);
+                let sec = s % 60;
+                document.getElementById('vcrClock').innerText = `00:${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+            }, 1000);
+        }
+
+        function stopAudio() {
+            if(document.getElementById('playerStatus')) {
+                document.getElementById('playerStatus').innerText = "PLAYBACK_STOPPED";
+                document.getElementById('playerStatus').classList.remove('animate-pulse');
+                document.getElementById('vcrClock').innerText = "00:00:00";
+            }
+            clearInterval(timerInt);
+        }
+
+        renderStage('locked');
+    </script>
+
+    <style>
+        @keyframes progress { 0% { width: 0%; } 100% { width: 100%; } }
+        .animate-progress { animation: progress 3.5s ease-in-out forwards; }
+    </style>
+</body>
+</html>
